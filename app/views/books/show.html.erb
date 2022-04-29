@@ -5,7 +5,18 @@
     <% end %>
 
     <%= render @book %>
-
+    
+    <p>Chapters</p>
+    <ol class="list-decimal">
+      <% @book.chapters.each do |chapter| %>
+        <li>
+          <%= link_to chapter.caption, book_chapter_path(@book, chapter) %>
+          <%= link_to '編集', edit_book_chapter_path(@book, chapter) %>
+          <%= button_to '削除', book_chapter_path(@book, chapter), method: :delete if chapter.number == @book.chapters.length %>
+        </li>
+      <% end %>
+    </ol>
+    <%= link_to 'チャプターを作成', new_book_chapter_path(@book), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"  %>
     <%= link_to 'Edit this book', edit_book_path(@book), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this book', book_path(@book), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>

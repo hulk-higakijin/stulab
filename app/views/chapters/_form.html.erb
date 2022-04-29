@@ -1,0 +1,5 @@
+<%= form_with model: [@book, @chapter] do |f| %>
+  <%= f.text_field :caption %><br>
+  <%= f.text_area :content %>
+  <%= f.submit '登録' %>
+<% end %>
