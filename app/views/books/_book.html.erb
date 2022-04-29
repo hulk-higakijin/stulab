@@ -1,27 +1,27 @@
-<div id="<%= dom_id book %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= book.title %>
-  </p>
+<div id="<%= dom_id book %>" class="col-span-1 rounded-xl min-h-96 shadow-md flex flex-col">
+  <img
+    src="https://techpit-market-prod.s3.amazonaws.com/uploads/course/eye_catch/219/9ea2bb1b-ee21-4a38-bf34-8e42c0b08ad7.jpg"
+    class="w-full rounded-t-xl"
+  >
+  <div class="flex px-4">
+    <img
+      src="https://thumbs.dreamstime.com/b/proof-stamp-proof-stamp-white-background-183339379.jpg"
+      class="h-16 w-16 rounded-full"
+      style="margin-top: -2em;"
+    >
+    <p class="my-auto px-2 text-sm">higakijin</p>
+  </div>
+  <div class="px-5 pb-5 pt-2 grow flex flex-col gap-y-2">
+    <p class="text-lg font-bold"><%= book.title %></p>
+    <div class="">
+      <span class="bg-gray-200 rounded-full text-gray-500 px-2 mb-1 inline-block text-sm">その他</span>
+      <span class="bg-gray-200 rounded-full text-gray-500 px-2 mb-1 inline-block text-sm">その他</span>
+      <span class="bg-gray-200 rounded-full text-gray-500 px-2 mb-1 inline-block text-sm">その他</span>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Introduction:</strong>
-    <%= book.introduction %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Price:</strong>
-    <%= book.price %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Likes count:</strong>
-    <%= book.likes_count %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this book", book, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this book', edit_book_path(book), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+    <div class="mt-auto flex">
+      <p class="text-blue-800 text-lg">¥<%= book.price %></p>
+      <p class="text-gray-400 ml-auto text-xs mt-auto"><%= book.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
+  </div>
 </div>
