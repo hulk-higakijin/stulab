@@ -1,8 +1,7 @@
 class ChaptersController < ApplicationController
   before_action :set_book
 
-  def show
-  end
+  def show; end
 
   def new
     @chapter = @book.chapters.new
@@ -11,9 +10,7 @@ class ChaptersController < ApplicationController
   def create
     @chapter = @book.chapters.new(chapter_params)
     @chapter.number = @book.chapters.length
-    if @chapter.save
-      redirect_to book_path(@book)
-    end
+    redirect_to book_path(@book) if @chapter.save
   end
 
   def edit
@@ -22,9 +19,7 @@ class ChaptersController < ApplicationController
 
   def update
     @chapter = @book.chapters.find(params[:id])
-    if @chapter.update(chapter_params)
-      redirect_to book_path(@book)
-    end
+    redirect_to book_path(@book) if @chapter.update(chapter_params)
   end
 
   def destroy
@@ -46,5 +41,4 @@ class ChaptersController < ApplicationController
     def chapter_params
       params.require(:chapter).permit(:caption, :content)
     end
-
 end
