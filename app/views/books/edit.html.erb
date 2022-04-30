@@ -1,0 +1,8 @@
+<%= render 'layouts/header' %>
+<section>
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="font-bold text-4xl text-blue-900">本情報を編集</h1>
+    <%= render "form", book: @book %>
+    <%= link_to '本に戻る', book_path(@book), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+</section>
