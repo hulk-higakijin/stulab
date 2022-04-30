@@ -84,3 +84,6 @@ production:
   database: stulab_production
   username: stulab
   password: <%= ENV["STULAB_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
