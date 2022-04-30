@@ -1,7 +1,8 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New book</h1>
-
-  <%= render "form", book: @book %>
-
-  <%= link_to 'Back to books', books_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-</div>
+<%= render 'layouts/header' %>
+<section>
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="font-bold text-4xl text-blue-900">新たに執筆する</h1>
+    <%= render "form", book: @book %>
+    <%= link_to '一覧へ戻る', books_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+</section>
