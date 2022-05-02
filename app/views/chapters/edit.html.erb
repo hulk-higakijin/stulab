@@ -1,5 +1,8 @@
-<h1><%= @book.title %></h1>
-<p><%= @book.introduction %></p>
-<br>
-<p>Chapter. <%= @chapter.number %></p>
-<%= render 'form' %>
+<%= render 'layouts/header' %>
+<section>
+  <div class="max-w-4xl mx-auto p-6">
+    <h2 class="text-blue-900 text-3xl font-bold">記事：<%= @book.title %></h2>
+    <h1 class="font-bold text-4xl text-blue-900">Chapter. <%= @book.chapters.length %>の編集</h1>
+    <%= render 'chapters/form' %>
+  </div>
+</section>
