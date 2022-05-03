@@ -72,7 +72,13 @@
 }
 
 .trix-content img {
-  width: 80%;
-  padding: 20px;
-  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .trix-content img {
+    width: 80%;
+    padding: 20px;
+    margin: 0 auto;
+  }
 }
