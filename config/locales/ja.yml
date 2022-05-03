@@ -8,6 +8,8 @@ ja:
       comment: コメント
       like: いいね
       contact: お問い合わせ
+      book: 本
+      chapter: チャプター
     attributes:
       # 各モデルのカラム名を記載
       user:
@@ -300,6 +302,7 @@ ja:
         title: "%{model_label_plural}の一覧"
         menu: "一覧"
         breadcrumb: "%{model_label_plural}"
+        no_records: "レコードがありません"
       show:
         title: "%{model_label} '%{object_label}'の詳細"
         menu: "詳細"
