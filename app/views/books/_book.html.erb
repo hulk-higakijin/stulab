@@ -21,7 +21,7 @@
       </div>
 
       <div class="mt-auto flex">
-        <p class="text-blue-800 text-lg">¥<%= book.price %></p>
+        <p class="text-blue-800 text-lg"><%= number_to_currency(book.price, unit: "￥", precision: 0) %></p>
         <p class="text-gray-400 ml-auto text-xs mt-auto"><%= book.created_at.strftime('%Y/%m') %></p>
       </div>
     </div>

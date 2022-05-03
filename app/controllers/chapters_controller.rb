@@ -14,7 +14,6 @@ class ChaptersController < ApplicationController
   def create
     @chapter = @book.chapters.new(chapter_params)
     @chapter.number = @book.chapters.length
-    # redirect_to book_path(@book) if @chapter.save
     redirect_to book_chapter_path(@book, @chapter) if @chapter.save
   end
 
