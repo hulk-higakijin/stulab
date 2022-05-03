@@ -1,4 +1,76 @@
-<div>
-  <h1 class="font-bold text-4xl">Chapters#show</h1>
-  <p>Find me in app/views/chapters/show.html.erb</p>
-</div>
+<section class="flex h-screen">
+  <div class="md:w-1/5 h-full shadow-md bg-white px-8 md:px-4 hidden md:flex flex-col gap-y-2">
+    <h1 class="text-xl mt-4 text-gray-500"><%= link_to 'Stulab', root_path %></h1>
+    <img
+      src="https://pbs.twimg.com/media/FQdhcm_XEAQy00u?format=jpg&name=medium"
+      class="rounded-lg w-full max-h-52 gap-y-2 object-cover"
+    >
+    <div>
+      <h2 class="font-medium"><%= @book.title %></h2>
+      <p class="text-sm text-gray-400 text-right">by higakijin</p>
+    </div>
+    <hr class="my-2">
+    <ul class="px-1 flex flex-col gap-y-2 overflow-scroll">
+      <% @book.chapters.each do |chapter| %>
+        <li class="py-2 px-4 text-gray-400 text-sm">
+          <%= link_to book_chapter_path(@book, chapter), class: "flex gap-1" do %>
+            <i class="not-italic block <%= 'text-blue-500 text-lg' if chapter.id == params[:id].to_i %>">
+              0<%= chapter.number %>
+            </i>
+            <i class="not-italic block <%= 'text-black text-lg font-medium' if chapter.id == params[:id].to_i %> break-all">
+              <%= chapter.caption %>
+            </i>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="w-full md:w-4/5 flex flex-col gap-y-10 overflow-scroll">
+    <div class="h-fit bg-blue-50">
+      <div class="max-w-3xl mx-auto flex flex-col gap-y-6 py-12 px-8 md:px-4">
+        <span class="text-gray-500 text-xl font-semibold">Chapter.<%= @chapter.number %></span>
+        <h1 class="font-bold text-3xl"><%= @chapter.caption %></h1>
+        <div class="flex gap-x-2">
+          <img
+            src="https://thumbs.dreamstime.com/b/proof-stamp-proof-stamp-white-background-183339379.jpg"
+            class="h-10 w-10 rounded-full"
+          >
+          <div class="my-auto">
+            <p class="text-sm">higakijin</p>
+            <p class="text-gray-500 text-xs"><%= @chapter.created_at.strftime('%Y.%m.%d') %>に更新</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mb-20 flex flex-col gap-y-20 px-8 md:px-4 w-full md:max-w-3xl">
+      <%= @chapter.content %>
+      <div class="flex justify-between w-full gap-x-2">
+        <% if @pre_chapter.present? %>
+          <%= link_to "/books/#{@book.id}/chapters/#{@pre_chapter.id}", class: "shadow-lg border rounded-xl w-1/2 md:w-72 min-h-24 flex h-full py-4 px-6 md:gap-x-4" do %>
+            <div class="my-auto text-blue-900 font-bold text-2xl">←</div>
+            <div class="flex flex-col my-auto">
+              <span class="text-gray-400 text-sm">PREV</span>
+              <div class="flex flex-col md:flex-row gap-x-1">
+                <span class="font-semibold">Ch.<%= @pre_chapter.number %>: </span>
+                <span class="font-semibold break-all"><%= @pre_chapter.caption %></span>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @next_chapter.present? %>
+          <%= link_to "/books/#{@book.id}/chapters/#{@next_chapter.id}", class:"shadow-lg border rounded-xl w-1/2 md:w-72 min-h-24 ml-auto flex h-full py-4 px-6 md:gap-x-4" do %>
+            <div class="flex flex-col my-auto">
+              <span class="text-gray-400 text-sm">NEXT</span>
+              <div class="flex flex-col md:flex-row gap-x-1">
+                <span class="font-semibold">Ch.<%= @next_chapter.number %>: </span>
+                <span class="font-semibold break-all"><%= @next_chapter.caption %></span>
+              </div>
+            </div>
+            <div class="my-auto text-blue-900 font-bold text-2xl ml-auto">→</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+

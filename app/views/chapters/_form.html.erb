@@ -1,5 +1,14 @@
 <%= form_with model: [@book, @chapter] do |f| %>
-  <%= f.text_field :caption %><br>
-  <%= f.text_area :content %>
-  <%= f.submit '登録' %>
+  <div class="my-5">
+    <%= f.label 'チャプタータイトル' %>
+    <%= f.text_field :caption, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+  <div class="my-5">
+    <%= f.label '紹介文' %>
+    <%= f.rich_text_area :content %>
+  </div>
+  <div class="my-5">
+    <%= f.submit '保存', class: "bg-blue-500 rounded-xl px-4 py-2 text-white cursor-pointer hover:bg-blue-600" %>
+    <%= link_to '本情報に戻る', book_path(@book), class: "px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 ml-4" %>
+  </div>
 <% end %>

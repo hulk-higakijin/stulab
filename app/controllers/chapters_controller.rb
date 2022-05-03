@@ -1,7 +1,11 @@
 class ChaptersController < ApplicationController
   before_action :set_book
 
-  def show; end
+  def show
+    @chapter = @book.chapters.find(params[:id])
+    @pre_chapter = @book.chapters.find_by(number: @chapter.number - 1)
+    @next_chapter = @book.chapters.find_by(number: @chapter.number + 1)
+  end
 
   def new
     @chapter = @book.chapters.new
@@ -10,7 +14,7 @@ class ChaptersController < ApplicationController
   def create
     @chapter = @book.chapters.new(chapter_params)
     @chapter.number = @book.chapters.length
-    redirect_to book_path(@book) if @chapter.save
+    redirect_to book_chapter_path(@book, @chapter) if @chapter.save
   end
 
   def edit
@@ -19,7 +23,7 @@ class ChaptersController < ApplicationController
 
   def update
     @chapter = @book.chapters.find(params[:id])
-    redirect_to book_path(@book) if @chapter.update(chapter_params)
+    redirect_to book_chapter_path(@book, @chapter) if @chapter.update(chapter_params)
   end
 
   def destroy
