@@ -13,7 +13,7 @@
     <ul class="px-1 flex flex-col gap-y-2 overflow-scroll">
       <% @book.chapters.each do |chapter| %>
         <li class="py-2 px-4 text-gray-400 text-sm">
-          <%= link_to book_chapter_path(@book, chapter), class: "flex gap-y-2" do %>
+          <%= link_to book_chapter_path(@book, chapter), class: "flex gap-1" do %>
             <i class="not-italic block <%= 'text-blue-500 text-lg' if chapter.id == params[:id].to_i %>">
               0<%= chapter.number %>
             </i>
@@ -50,7 +50,7 @@
             <div class="my-auto text-blue-900 font-bold text-2xl">←</div>
             <div class="flex flex-col my-auto">
               <span class="text-gray-400 text-sm">PREV</span>
-              <div class="flex flex-col md:flex-row">
+              <div class="flex flex-col md:flex-row gap-x-1">
                 <span class="font-semibold">Ch.<%= @pre_chapter.number %>: </span>
                 <span class="font-semibold break-all"><%= @pre_chapter.caption %></span>
               </div>
@@ -61,7 +61,7 @@
           <%= link_to "/books/#{@book.id}/chapters/#{@next_chapter.id}", class:"shadow-lg border rounded-xl w-1/2 md:w-72 min-h-24 ml-auto flex h-full py-4 px-6 md:gap-x-4" do %>
             <div class="flex flex-col my-auto">
               <span class="text-gray-400 text-sm">NEXT</span>
-              <div class="flex flex-col md:flex-row">
+              <div class="flex flex-col md:flex-row gap-x-1">
                 <span class="font-semibold">Ch.<%= @next_chapter.number %>: </span>
                 <span class="font-semibold break-all"><%= @next_chapter.caption %></span>
               </div>
