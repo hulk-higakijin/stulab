@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.text :introduction
       t.text :twitter_url
       t.text :youtube_url
-      # t.string :public_uid, null: false
+      t.string :public_uid, null: false, unique: true, index: { unique: true }
 
       t.timestamps null: false
     end
