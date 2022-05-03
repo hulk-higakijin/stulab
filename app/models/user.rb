@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   generate_public_uid generator: PublicUid::Generators::HexStringSecureRandom.new(15)
+
+  has_many :books
 end
