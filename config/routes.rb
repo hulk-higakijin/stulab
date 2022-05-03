@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :books do
     resources :chapters, except: :index
   end
+  devise_for :users
 end
