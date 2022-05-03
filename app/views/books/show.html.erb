@@ -40,13 +40,13 @@
         >
         <div class="flex text-black">
           <p class="mt-auto">価格</p>
-          <p class="font-semibold ml-auto text-2xl"><%= number_to_currency(@book.price, unit: "￥", precision: 0) %></p>
+          <p class="font-semibold ml-auto text-2xl"><%= number_to_currency(@book.price, unit: "円", precision: 0) %></p>
         </div>
         <button class="text-blue-700 border border-blue-700 rounded-lg w-full hover:bg-blue-800 hover:text-white">購入する</button>
         <hr class="my-2">
         <div class="flex text-black">
           <p class="mt-auto">月額</p>
-          <p class="font-semibold ml-auto text-2xl">¥2,980</p>
+          <p class="font-semibold ml-auto text-2xl">2,980円</p>
         </div>
         <button class="bg-blue-800 rounded-lg w-full hover:bg-indigo-500">Stulab Extreamへ</button>
       </div>
