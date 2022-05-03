@@ -15,3 +15,13 @@ book = Book.create!(
 ['新撰組説', '水戸藩説', '薩摩藩説', '土佐藩説'].each do |e|
   book.chapters.create!(caption: e, number: book.chapters.length + 1 )
 end
+
+user = User.create!(
+  name: '野生のミシシッピズワイガニ',
+  email: 'kanikani.zuwai@example.com',
+  password: '123456',
+  password_confirmation: '123456',
+  public_uid: 'kanikanizuwai'
+)
+## 管理者権限をつける
+user.update_attribute(:admin, true)

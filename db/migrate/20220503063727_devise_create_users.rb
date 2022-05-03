@@ -38,6 +38,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.text :youtube_url
       t.string :public_uid, null: false, unique: true, index: { unique: true }
 
+      t.boolean :admin, default: false
+
       t.timestamps null: false
     end
 
