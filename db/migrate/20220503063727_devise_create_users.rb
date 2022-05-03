@@ -39,6 +39,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :public_uid, null: false, unique: true, index: { unique: true }
 
       t.boolean :admin, default: false
+      t.boolean :author, default: false
 
       t.timestamps null: false
     end
