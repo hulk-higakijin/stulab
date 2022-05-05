@@ -1,26 +1,41 @@
-<h2><%= t('.sign_in') %></h2>
+<section class="bg-gray-50 w-screen h-screen flex">
+  <div class="border border-gray-300 m-auto bg-white p-10">
+    <span class="font-semibold text-3xl">Stulab</span>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="flex mt-6">
+        <div class="bg-blue-50 flex rounded-l-sm border-y-2 border-l-2 border-gray-200">
+          <svg class="h-8 w-8 m-auto inline-block p-1" fill="gray" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 75.294 75.294" style="enable-background:new 0 0 75.294 75.294;" xml:space="preserve">
+            <g>
+              <path d="M66.097,12.089h-56.9C4.126,12.089,0,16.215,0,21.286v32.722c0,5.071,4.126,9.197,9.197,9.197h56.9
+                c5.071,0,9.197-4.126,9.197-9.197V21.287C75.295,16.215,71.169,12.089,66.097,12.089z M61.603,18.089L37.647,33.523L13.691,18.089
+                H61.603z M66.097,57.206h-56.9C7.434,57.206,6,55.771,6,54.009V21.457l29.796,19.16c0.04,0.025,0.083,0.042,0.124,0.065
+                c0.043,0.024,0.087,0.047,0.131,0.069c0.231,0.119,0.469,0.215,0.712,0.278c0.025,0.007,0.05,0.01,0.075,0.016
+                c0.267,0.063,0.537,0.102,0.807,0.102c0.001,0,0.002,0,0.002,0c0.002,0,0.003,0,0.004,0c0.27,0,0.54-0.038,0.807-0.102
+                c0.025-0.006,0.05-0.009,0.075-0.016c0.243-0.063,0.48-0.159,0.712-0.278c0.044-0.022,0.088-0.045,0.131-0.069
+                c0.041-0.023,0.084-0.04,0.124-0.065l29.796-19.16v32.551C69.295,55.771,67.86,57.206,66.097,57.206z"/>
+            </g>
+          </svg>
+        </div>
+        <%= f.email_field :email, autofocus: true, placeholder: t('activerecord.attributes.user.email'), class: "bg-gray-100 border-r-2 border-gray-200 rounded-r-sm w-full focus:ring-0" %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="flex mt-6">
+        <div class="bg-blue-50 flex rounded-l-sm border-y-2 border-l-2 border-gray-200">
+          <svg class="h-8 w-8 m-auto inline-block p-1" fill="gray" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+            <g>
+              <path d="m432,224h-48v-96c0-70.578-57.422-128-128-128s-128,57.422-128,128v96h-48c-8.836,0-16,7.164-16,16v256c0,8.836 7.164,16 16,16h352c8.836,0 16-7.164 16-16v-256c0-8.836-7.164-16-16-16zm-272-96c0-52.938 43.063-96 96-96s96,43.063 96,96v96h-16v-96c0-44.109-35.891-80-80-80s-80,35.891-80,80v96h-16v-96zm48,96v-96c0-26.469 21.531-48 48-48 26.469,0 48,21.531 48,48v96h-96zm208,256h-320v-224h320v224z"/>
+              <path d="m256,304.002c-17.673,0-32,14.326-32,32 0,11.814 6.476,22.018 16,27.561v36.439c0,8.836 7.163,16 16,16 8.837,0 16-7.164 16-16v-36.439c9.524-5.543 16-15.747 16-27.561 0-17.674-14.327-32-32-32z"/>
+            </g>
+          </svg>
+        </div>
+        <%= f.password_field :password, placeholder: t('activerecord.attributes.user.password'), class: "bg-gray-100 border-2 border-gray-200 rounded-r-sm w-full focus:ring-0" %>
+      </div>
+
+      <div class="text-xs p-8 text-center">
+        <%= render "devise/shared/links" %>
+      </div>
+      <%= f.submit t('.sign_in'), class: "bg-black text-white w-full py-4 text-center text-sm rounded-md cursor-pointer hover:bg-gray-700" %>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>
