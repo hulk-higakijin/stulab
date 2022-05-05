@@ -1,13 +1,19 @@
 <section class="flex h-screen">
   <div class="md:w-1/5 h-full shadow-md bg-white px-8 md:px-4 hidden md:flex flex-col gap-y-2">
-    <h1 class="text-xl mt-4 text-gray-500"><%= link_to 'Stulab', root_path %></h1>
-    <img
-      src="https://pbs.twimg.com/media/FQdhcm_XEAQy00u?format=jpg&name=medium"
-      class="rounded-lg w-full max-h-52 gap-y-2 object-cover"
-    >
+    <h1 class="text-lg mt-4 text-gray-700 ml-4">
+      <%= link_to 'Stulab', root_path %>
+    </h1>
+    <% if @book.thumbnail.attached? %>
+      <%= image_tag @book.thumbnail, class: "rounded-lg w-full max-h-52 gap-y-2 object-cover" %>
+    <% else %>    
+      <img
+        src="https://pbs.twimg.com/media/FQdhcm_XEAQy00u?format=jpg&name=medium"
+        class="rounded-lg w-full max-h-52 gap-y-2 object-cover"
+      >
+    <% end %>
     <div>
       <h2 class="font-medium"><%= @book.title %></h2>
-      <p class="text-sm text-gray-400 text-right">by higakijin</p>
+      <p class="text-sm text-gray-400 text-right">by <%= @book.user.name %></p>
     </div>
     <hr class="my-2">
     <ul class="px-1 flex flex-col gap-y-2 overflow-scroll">
@@ -36,7 +42,7 @@
             class="h-10 w-10 rounded-full"
           >
           <div class="my-auto">
-            <p class="text-sm">higakijin</p>
+            <p class="text-sm"><%= @book.user.name %></p>
             <p class="text-gray-500 text-xs"><%= @chapter.created_at.strftime('%Y.%m.%d') %>に更新</p>
           </div>
         </div>

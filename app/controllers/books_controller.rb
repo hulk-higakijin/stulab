@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[show edit update destroy]
+  before_action :set_book, only: %i[edit update destroy]
 
   # GET /books or /books.json
   def index
@@ -7,11 +7,13 @@ class BooksController < ApplicationController
   end
 
   # GET /books/1 or /books/1.json
-  def show; end
+  def show
+    @book = Book.find(params[:id])
+  end
 
   # GET /books/new
   def new
-    @book = Book.new
+    @book = current_user.books.new
   end
 
   # GET /books/1/edit
@@ -19,8 +21,7 @@ class BooksController < ApplicationController
 
   # POST /books or /books.json
   def create
-    @book = Book.new(book_params)
-
+    @book = current_user.books.new(book_params)
     respond_to do |format|
       if @book.save
         format.html { redirect_to book_url(@book), notice: 'Book was successfully created.' }
@@ -59,11 +60,11 @@ class BooksController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @book = Book.find(params[:id])
+      @book = current_user.books.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :introduction, :price, :likes_count)
+      params.require(:book).permit(:title, :introduction, :price, :likes_count, :thumbnail)
     end
 end
