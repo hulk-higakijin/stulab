@@ -40,7 +40,7 @@ class ChaptersController < ApplicationController
     end
 
     def need_permission
-      raise ActionController::RoutingError.new('Not Found') if @book.user.public_uid != current_user.public_uid
+      raise ActionController::RoutingError, 'Not Found' if @book.user.public_uid != current_user.public_uid
     end
 
     def set_chapter
