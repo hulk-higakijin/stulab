@@ -16,6 +16,11 @@
         <%= f.password_field :password, placeholder: t('activerecord.attributes.user.password'), required: true, class: "bg-gray-100 border-2 border-gray-200 rounded-r-sm w-full focus:ring-0" %>
       </div>
 
+      <div class="text-red-500 text-xs">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+
       <div class="text-xs p-8 text-center">
         <%= render "devise/shared/links" %>
       </div>
