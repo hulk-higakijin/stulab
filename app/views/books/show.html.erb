@@ -29,24 +29,28 @@
               src="https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg"
               class="h-10 w-10 rounded-full object-cover my-auto"
             >
-            <p class="my-auto">higakijin</p>
+            <p class="my-auto"><%= @book.user.name %></p>
           </div>
         </div>
       </div>
       <div class="md:w-1/3 bg-white rounded-xl p-4 flex flex-col gap-y-2 h-full my-2 md:m-0">
-        <img
-          src="https://pbs.twimg.com/media/FQdhcm_XEAQy00u?format=jpg&name=medium"
-          class="w-full max-h-32 object-cover"
-        >
+        <% if @book.thumbnail.attached? %>
+          <%= image_tag @book.thumbnail, class: "w-full max-h-32 object-cover" %>
+        <% else %>
+          <img
+            src="https://pbs.twimg.com/media/FQdhcm_XEAQy00u?format=jpg&name=medium"
+            class="w-full max-h-32 object-cover"
+          >
+        <% end %>
         <div class="flex text-black">
           <p class="mt-auto">価格</p>
-          <p class="font-semibold ml-auto text-2xl"><%= number_to_currency(@book.price, unit: "￥", precision: 0) %></p>
+          <p class="font-semibold ml-auto text-2xl"><%= number_to_currency(@book.price, unit: "円", precision: 0) %></p>
         </div>
         <button class="text-blue-700 border border-blue-700 rounded-lg w-full hover:bg-blue-800 hover:text-white">購入する</button>
         <hr class="my-2">
         <div class="flex text-black">
           <p class="mt-auto">月額</p>
-          <p class="font-semibold ml-auto text-2xl">¥2,980</p>
+          <p class="font-semibold ml-auto text-2xl">2,980円</p>
         </div>
         <button class="bg-blue-800 rounded-lg w-full hover:bg-indigo-500">Stulab Extreamへ</button>
       </div>
@@ -54,7 +58,7 @@
   </div>
   <div class="max-w-4xl mx-auto p-8">
     <div class="md:w-2/3 flex flex-col gap-y-10">
-      <% if false %>
+      <% if user_signed_in? && @book.user.public_uid == current_user.public_uid %>
         <div>
           <h1 class="border-l-8 border-blue-700 px-4 text-xl font-medium">著者オプション</h1>
           <div class="md:flex m-4 gap-x-4">
@@ -73,17 +77,17 @@
               <span class="my-auto"><%= chapter.caption %></span>
             </div>
             <div class="ml-auto flex gap-x-1">
-              <% if true %>
-                <%= link_to 'サンプルをみる', book_chapter_path(@book, chapter), class: "bg-blue-800 hover:bg-blue-900 rounded-md text-white px-4 py-1" %>
-              <% else %>
+              <% if user_signed_in? && @book.user.public_uid == current_user.public_uid %>
                 <%= link_to '閲覧', book_chapter_path(@book, chapter), class: "bg-blue-800 hover:bg-blue-900 rounded-md text-white px-4 py-1" %>
                 <%= link_to '編集', edit_book_chapter_path(@book, chapter), class: "bg-green-500 hover:bg-green-600 rounded-md text-white px-4 py-1" %>
                 <% if chapter.number == @book.chapters.length %>
                 <%# 公開していない、という条件も追加 %>
-                  <%= button_to '削除', book_chapter_path(@book, chapter), method: :delete, class: "bg-red-500 hover:bg-red-600 rounded-md text-white px-4 py-1" %>
+                  <%= button_to '削除', book_chapter_path(@book, chapter), method: :delete, form: { data: { turbo_confirm: '削除しますか？' }}, class: "bg-red-500 hover:bg-red-600 rounded-md text-white px-4 py-1" %>
                 <% else %>
                   <p class="my-auto text-green-600">公開済み</p>
                 <% end %>
+              <% else %>
+                <%= link_to 'サンプルをみる', book_chapter_path(@book, chapter), class: "bg-blue-800 hover:bg-blue-900 rounded-md text-white px-4 py-1" %>
               <% end %>
             </div>
           </div>
@@ -92,17 +96,15 @@
       <div>
         <h1 class="border-l-8 border-blue-700 px-4 text-xl font-medium mb-4 ">著者のプロフィール</h1>
         <div class="flex">
-          <div class="">
+          <div class="w-32">
             <img
               src="https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg"
-              class="h-32 w-full rounded-full p-2 inline-block object-cover"
+              class="h-32 rounded-full p-2 inline-block object-cover"
             >
-            <p class="text-center">higakijin</p>
+            <p class="text-center text-sm"><%= @book.user.name %></p>
           </div>
           <div class="py-4 text-sm text-gray-500 w-3/4">
-            横浜で大学生、六本木でエンジニアをしています。大学生エンジニアとして日本のIT業界の発展に少しでも貢献するべく活動してます。目標は教育業界にITのメスを入れることです
-            横浜で大学生、六本木でエンジニアをしています。大学生エンジニアとして日本のIT業界の発展に少しでも貢献するべく活動してます。目標は教育業界にITのメスを入れることです
-            横浜で大学生、六本木でエンジニアをしています。大学生エンジニアとして日本のIT業界の発展に少しでも貢献するべく活動してます。目標は教育業界にITのメスを入れることです
+            <%= @book.user.introduction %>
           </div>
         </div>
       </div>
