@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_144251) do
   create_table "books", force: :cascade do |t|
     t.string "title", null: false
     t.text "introduction"
-    t.integer "price", default: 0
+    t.integer "price", default: 1000
     t.integer "likes_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

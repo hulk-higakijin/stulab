@@ -23,5 +23,28 @@ book = user.books.create!(
 )
 
 ['新撰組説', '水戸藩説', '薩摩藩説', '土佐藩説'].each do |e|
-  book.chapters.create!(caption: e, number: book.chapters.length + 1 )
+  chapter = book.chapters.create!(caption: e, number: book.chapters.length + 1 )
+  ActionText::RichText.create!(record_type: 'Chapter', record_id: chapter.id, name: 'content', body: Faker::Lorem.paragraph(sentence_count: 100) )
+end
+
+
+5.times.each do |n|
+  name = Faker::Name.name
+  fake_user = User.create!(
+    name: name,
+    email: "#{n.to_s + Faker::Internet.email(name: name, domain: 'example')}",
+    password: '123456',
+    password_confirmation: '123456',
+    public_uid: "#{name + n.to_s}"
+  ) 
+  book = fake_user.books.create!(
+    title: Faker::Lorem.paragraph,
+    introduction: Faker::Lorem.paragraph,
+    price: Random.rand(1000..5000)
+  )
+  int = Random.rand(3..10)
+  int.times.each do |n|
+    chapter = book.chapters.create!(caption: Faker::Lorem.sentence, number: book.chapters.length + 1)
+    ActionText::RichText.create!(record_type: 'Chapter', record_id: chapter.id, name: 'content', body: Faker::Lorem.paragraph(sentence_count: 100))
+  end
 end
