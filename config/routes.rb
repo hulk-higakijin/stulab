@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :books do
     resources :chapters, except: :index
+    resources :reviews, only: %i[ create destroy ]
   end
 end
