@@ -8,8 +8,8 @@ class Book < ApplicationRecord
   validates :introduction, presence: true, length: { in: 20..200 }
   validates :price, numericality: { in: 1000..5000 }
 
-  def review(int)
-    (reviews.where(score: int).length.to_f * 100 / reviews.length.to_f).floor
+  def review(score)
+    (reviews.where(score: score).length.to_f * 100 / reviews.length.to_f).floor
   rescue StandardError
     0
   end
