@@ -37,6 +37,7 @@ end
     password: '123456',
     password_confirmation: '123456',
     public_uid: "#{name + n.to_s}",
+    introduction: Faker::Lorem.paragraph,
     author: true
   ) 
   book = fake_user.books.create!(
