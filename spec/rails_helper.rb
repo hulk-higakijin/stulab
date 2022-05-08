@@ -64,4 +64,7 @@ RSpec.configure do |config|
 
   ## factory_botの設定
   config.include FactoryBot::Syntax::Methods
+
+  ## deviseのsign_inを使えるようにする
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

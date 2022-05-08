@@ -3,7 +3,8 @@ user = User.create!(
   email: 'kanikani.zuwai@example.com',
   password: '123456',
   password_confirmation: '123456',
-  public_uid: 'kanikanizuwai'
+  public_uid: 'kanikanizuwai',
+  author: true
 )
 ## 管理者権限をつける
 user.update_attribute(:admin, true)
@@ -35,7 +36,8 @@ end
     email: "#{n.to_s + Faker::Internet.email(name: name, domain: 'example')}",
     password: '123456',
     password_confirmation: '123456',
-    public_uid: "#{name + n.to_s}"
+    public_uid: "#{name + n.to_s}",
+    author: true
   ) 
   book = fake_user.books.create!(
     title: Faker::Lorem.paragraph,
