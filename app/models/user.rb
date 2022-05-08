@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   has_many :books
   has_one_attached :avatar
+
+  validates :name, presence: true, length: { maximum: 15 }
+  validates :introduction, length: { maximum: 160 }
+  validates :public_uid, uniqueness: true, length: { maximum: 15 }
 end
