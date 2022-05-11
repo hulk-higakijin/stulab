@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.all
+    @books = Book.includes(:user).with_attached_thumbnail
   end
 
   # GET /books/1 or /books/1.json
