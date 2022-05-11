@@ -9,13 +9,13 @@ class Book < ApplicationRecord
   validates :price, numericality: { in: 1000..5000 }
 
   def review(score)
-    (reviews.where(score: score).length.to_f * 100 / reviews.length.to_f).floor
+    (reviews.where(score: score).length.to_f * 100 / reviews.length.to_f).round
   rescue StandardError
     0
   end
 
   def review_rate
-    rate = (reviews.pluck(:score).sum.to_f / reviews.length).floor(1)
+    rate = (reviews.pluck(:score).sum.to_f / reviews.length).round(1)
     rate = 0.0 if rate.nan?
     rate
   end
