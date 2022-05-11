@@ -112,21 +112,9 @@
         <h1 class="border-l-8 border-blue-700 px-4 text-xl font-medium mb-4">本のレビュー</h1>
         <% if user_signed_in? %>
           <%# 購入者限定の条件を書く           %>
-          <div class="flex gap-x-2 border-b border-gray-200 pb-10">
-            <%= form_with model: [@book, Review.new], method: :post, class: "w-full px-10" do |f| %>
-              <div class="flex items-center border-b border-blue-800 py-2">
-                <div class="w-full">
-                  <div class="pb-4">
-                    <%= f.select :score, [['★5', 5], ['★4', 4], ['★3', 3], ['★2', 2], ['★1', 1]], { include_blank: '評価' }, required: true  %>
-                  </div>
-                  <div class="flex">
-                    <%= f.text_area :message, class: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:ring-0 resize-none", rows: "4", placeholder: "レビューを投稿", required: true %>
-                    <%= f.submit '投稿', class: "flex-shrink-0 hover:bg-blue-800 border-blue-800 hover:border-blue-800 text-sm text-blue-800 py-1 px-2 rounded cursor-pointer border-2 border-blue-800 hover:text-white mt-auto" %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
+          <%= turbo_frame_tag "new_review" do %>
+            <%= render "reviews/form" %>
+          <% end %>
         <% end %>
         <div class="flex gap-x-2 border-b border-gray-200 p-10">
           <div class="w-32">
@@ -151,16 +139,8 @@
           </div>
         </div>
         <div class="mt-4">
-          <% @book.reviews.includes(:user).reverse_each do |review| %>
-            <div class="flex flex-col gap-y-2 pt-4">
-              <div class="flex gap-x-4">
-                <div class="text-yellow-500 not-italic"><%= star_rate(review.score) %></div>
-                <p class="text-sm text-gray-600 my-auto"><%= review.user.name %></p>
-                <p class="text-sm text-xs text-gray-500 my-auto"><%= format_ymd(review.created_at) %></p>
-              </div>
-              <p class="tracking-tight text-sm pb-2"><%= review.message %></p>
-              <hr>
-            </div>
+          <%= turbo_frame_tag "reviews" do %>
+            <%= render @book.reviews.reverse %>
           <% end %>
         </div>
       </div>
