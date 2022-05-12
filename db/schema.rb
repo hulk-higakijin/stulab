@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_12_123040) do
     t.text "introduction"
     t.integer "price", default: 1000
     t.integer "likes_count", default: 0
+    t.integer "status", default: 0
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -123,7 +124,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_12_123040) do
     t.text "twitter_url"
     t.text "youtube_url"
     t.string "public_uid", null: false
-    t.boolean "admin", default: false
     t.boolean "author", default: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false

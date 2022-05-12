@@ -1,5 +1,4 @@
 ActiveAdmin.register Book do
-  active_admin_paranoia
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,4 +13,13 @@ ActiveAdmin.register Book do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  permit_params :status
+
+  form do |f|
+    f.inputs 'Book' do
+      f.input :title
+      f.input :status, as: :select, collection: Book.statuses.keys
+    end
+    f.actions
+  end
 end

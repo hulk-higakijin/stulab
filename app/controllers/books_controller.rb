@@ -3,11 +3,11 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[edit update destroy]
 
   def index
-    @books = Book.includes(:user).with_attached_thumbnail
+    @books = Book.published.includes(:user).with_attached_thumbnail
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.published.find(params[:id])
   end
 
   def new
@@ -18,6 +18,7 @@ class BooksController < ApplicationController
 
   def create
     @book = @author.books.new(book_params)
+    @book.reservation!
     respond_to do |format|
       if @book.save
         format.html { redirect_to book_url(@book), notice: 'Book was successfully created.' }
