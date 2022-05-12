@@ -1,0 +1,3 @@
+<%= turbo_stream.update "reviews" do %>
+  <%= render @book.reviews.reverse %>
+<% end %>

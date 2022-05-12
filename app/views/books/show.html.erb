@@ -121,7 +121,12 @@
         <% end %>
         <div class="mt-4">
           <%= turbo_frame_tag "reviews" do %>
-            <%= render @book.reviews.reverse %>
+            <%= render @book.reviews.last(3).reverse %>
+            <% if @book.reviews.length >= 4 %>
+              <div class="w-full flex">
+                <%= link_to '▼ レビューを全て見る', book_reviews_path(@book), class: "mx-auto text-white bg-blue-800 rounded-lg px-4 py-2 m-4" %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>
