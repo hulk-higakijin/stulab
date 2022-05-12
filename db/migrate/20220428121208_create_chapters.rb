@@ -4,6 +4,7 @@ class CreateChapters < ActiveRecord::Migration[7.0]
       t.integer :number
       t.string :caption
       t.references :book, null: false, foreign_key: true
+      t.datetime :deleted_at
 
       t.timestamps
     end

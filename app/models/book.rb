@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :user
   has_many :chapters
   has_one_attached :thumbnail

@@ -1,5 +1,6 @@
 class Chapter < ApplicationRecord
-  belongs_to :book
+  acts_as_paranoid
 
+  belongs_to :book
   has_rich_text :content
 end

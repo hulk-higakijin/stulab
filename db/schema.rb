@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_131644) do
     t.text "introduction"
     t.integer "price", default: 1000
     t.integer "likes_count", default: 0
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -67,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_131644) do
     t.integer "number"
     t.string "caption"
     t.bigint "book_id", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_chapters_on_book_id"
@@ -77,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_131644) do
     t.bigint "book_id", null: false
     t.text "message", null: false
     t.integer "score", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
@@ -96,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_131644) do
     t.string "public_uid", null: false
     t.boolean "admin", default: false
     t.boolean "author", default: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
