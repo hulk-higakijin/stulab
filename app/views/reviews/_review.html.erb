@@ -3,7 +3,12 @@
     <div class="text-yellow-500 not-italic"><%= star_rate(review.score) %></div>
     <p class="text-sm my-auto"><%= review.user.name %></p>
     <p class="text-sm text-xs text-gray-500 my-auto"><%= format_ymd(review.created_at) %></p>
+    <% if review.user.public_uid == current_user.public_uid %>
+      <%= link_to book_review_path(@book, review), class: "ml-auto", data: { turbo_method: :delete } do %>
+        <%= render 'svg/wastebox' %>
+      <% end %>
+    <% end %>
   </div>
-  <p class="tracking-tight text-gray-600 text-sm pb-2"><%= review.message %></p>
+  <p class="tracking-tight text-gray-600 text-sm pb-2 break-all"><%= review.message %></p>
   <hr>
 </div>
