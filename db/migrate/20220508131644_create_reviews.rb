@@ -6,6 +6,8 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.text :message, null: false
       t.integer :score, null: false
 
+      t.datetime :deleted_at
+
       t.timestamps
     end
   end

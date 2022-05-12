@@ -5,7 +5,8 @@ class CreateBooks < ActiveRecord::Migration[7.0]
       t.text :introduction
       t.integer :price, default: 1000
       t.integer :likes_count, default: 0
-
+      t.datetime :deleted_at
+      
       t.timestamps
     end
   end

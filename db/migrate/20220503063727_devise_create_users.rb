@@ -41,6 +41,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.boolean :admin, default: false
       t.boolean :author, default: false
 
+      t.datetime :deleted_at
+
       t.timestamps null: false
     end
 
