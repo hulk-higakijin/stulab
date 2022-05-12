@@ -384,3 +384,8 @@ ja:
         default_col_sep: ","
         col_sep: "区切り文字"
         col_sep_help: "空白の場合は'%{value}'区切りです" # value is default_col_sep
+  active_admin_paranoia:
+    non_archived: active
+    archived: deleted
+    restore: 復元
+    restore_confirmation: 復元しますか？
