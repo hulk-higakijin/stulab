@@ -51,3 +51,4 @@ end
     ActionText::RichText.create!(record_type: 'Chapter', record_id: chapter.id, name: 'content', body: Faker::Lorem.paragraph(sentence_count: 100))
   end
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
