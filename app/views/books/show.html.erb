@@ -116,28 +116,9 @@
             <%= render "reviews/form" %>
           <% end %>
         <% end %>
-        <div class="flex gap-x-2 border-b border-gray-200 p-10">
-          <div class="w-32">
-            <p class="text-blue-800 text-6xl text-center"><%= @book.review_rate %></p>
-            <p class="text-yellow-500 not-italic text-center text-xl"><%= star_rate(@book.review_rate) %></p>
-            <p class="text-gray-500 text-sm text-center"><%= @book.reviews.count %>件の評価</p>
-          </div>
-          <div class="w-full flex flex-col gap-y-2 my-auto">
-            <% 5.times.reverse_each do |n| %>
-              <div class="bg-gray-200 h-3 w-full rounded-full relative">
-                <div class="absolute bg-blue-700 h-3 left-0 top-0 rounded-full" style="width: <%= @book.review(n+1) %>%;"></div>
-              </div>
-            <% end %>
-          </div>
-          <div class="inline-block my-auto">
-            <% 5.times.reverse_each do |n| %>
-              <div class="text-yellow-500 not-italic text-sm flex">
-                <%= star_rate(n+1) %>
-                <i class="not-italic text-blue-900 font-semibold px-1"><%= @book.review(n+1) %>%</i>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <%= turbo_frame_tag "review_rate" do %>
+          <%= render "reviews/rate" %>
+        <% end %>
         <div class="mt-4">
           <%= turbo_frame_tag "reviews" do %>
             <%= render @book.reviews.reverse %>
