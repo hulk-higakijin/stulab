@@ -43,7 +43,7 @@
           >
           <div class="my-auto">
             <p class="text-sm"><%= @book.user.name %></p>
-            <p class="text-gray-500 text-xs"><%= @chapter.created_at.strftime('%Y.%m.%d') %>に更新</p>
+            <p class="text-gray-500 text-xs"><%= format_ymd(@chapter.created_at) %>に更新</p>
           </div>
         </div>
       </div>

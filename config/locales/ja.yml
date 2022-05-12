@@ -10,6 +10,7 @@ ja:
       contact: お問い合わせ
       book: 本
       chapter: チャプター
+      review: レビュー
     attributes:
       # 各モデルのカラム名を記載
       user:

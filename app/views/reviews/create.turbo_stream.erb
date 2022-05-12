@@ -1,0 +1,7 @@
+<%= turbo_stream.update "new_review" do %>
+  <%= render "reviews/form" %>
+<% end %>
+<%= turbo_stream.update "review_rate" do %>
+  <%= render "reviews/rate" %>
+<% end %>
+<%= turbo_stream.prepend "reviews", @review %>

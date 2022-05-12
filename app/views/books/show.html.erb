@@ -18,9 +18,9 @@
           <div>
             <div class="flex py-2">
               <i class="text-yellow-500 not-italic">
-                ★★★★★
+                <%= star_rate(@book.review_rate) %>
               </i>
-              <span class="px-2">5</span>
+              <span class="px-2"><%= @book.review_rate %></span>
             </div>
             <p class="text-sm">最終更新 <%= @book.updated_at.strftime('%Y/%m') %></p>
           </div>
@@ -110,77 +110,24 @@
       </div>
       <div>
         <h1 class="border-l-8 border-blue-700 px-4 text-xl font-medium mb-4">本のレビュー</h1>
-        <div class="flex gap-x-2 border-b border-gray-200 pb-10">
-          <div class="w-32">
-            <p class="text-blue-800 text-6xl text-center">4.8</p>
-            <p class="text-yellow-500 not-italic text-center text-xl">
-              ★★★★★
-            </p>
-            <p class="text-gray-500 text-sm text-center">25件の評価</p>
-          </div>
-          <div class="w-full flex flex-col gap-y-2 my-auto">
-            <div class="bg-gray-200 h-3 w-full rounded-full relative">
-              <div class="absolute bg-blue-700 h-3 left-0 top-0 rounded-full" style="width: 80%;"></div>
-            </div>
-            <div class="bg-gray-200 h-3 w-full rounded-full relative">
-              <div class="absolute bg-blue-700 h-3 left-0 top-0 rounded-full" style="width: 10%;"></div>
-            </div>
-            <div class="bg-gray-200 h-3 w-full rounded-full relative">
-              <div class="absolute bg-blue-700 h-3 left-0 top-0 rounded-full" style="width: 10%;"></div>
-            </div>
-            <div class="bg-gray-200 h-3 w-full rounded-full relative">
-              <div class="absolute bg-blue-700 h-3 left-0 top-0 rounded-full" style="width: 0%;"></div>
-            </div>
-            <div class="bg-gray-200 h-3 w-full rounded-full relative">
-              <div class="absolute bg-blue-700 h-3 left-0 top-0 rounded-full" style="width: 0%;"></div>
-            </div>
-          </div>
-          <div class="inline-block my-auto">
-            <div class="text-yellow-500 not-italic text-sm">
-              ★★★★★<i class="not-italic text-blue-900 font-semibold px-1">80%</i>
-            </div>
-            <div class="text-yellow-500 not-italic text-sm">
-              ★★★★<span class="text-gray-300">★</span><i class="not-italic text-blue-900 font-semibold px-1">10%</i>
-            </div>
-            <div class="text-yellow-500 not-italic text-sm">
-              ★★★<span class="text-gray-300">★★</span><i class="not-italic text-blue-900 font-semibold px-1">10%</i>
-            </div>
-            <div class="text-yellow-500 not-italic text-sm">
-              ★★<span class="text-gray-300">★★★</span><i class="not-italic text-blue-900 font-semibold px-1">0%</i>
-            </div>
-            <div class="text-yellow-500 not-italic text-sm">
-              ★<span class="text-gray-300">★★★★</span><i class="not-italic text-blue-900 font-semibold px-1">0%</i>
-            </div>
-          </div>
-        </div>
+        <% if user_signed_in? %>
+          <%# 購入者限定の条件を書く           %>
+          <%= turbo_frame_tag "new_review" do %>
+            <%= render "reviews/form" %>
+          <% end %>
+        <% end %>
+        <%= turbo_frame_tag "review_rate" do %>
+          <%= render "reviews/rate" %>
+        <% end %>
         <div class="mt-4">
-          <div class="flex flex-col gap-y-2 pt-4">
-            <div class="flex gap-x-4">
-              <div class="text-yellow-500 not-italic">★★★★★</div>
-              <p class="text-sm text-gray-600 my-auto">higakijin</p>
-              <p class="text-sm text-xs text-gray-500 my-auto">3ヶ月前</p>
-            </div>
-            <p class="tracking-tight text-sm pb-2">悪くはない。坂本龍馬を暗殺した犯人を、幕末の社会情勢に照らし合わせて考えてみるというアプローチが非常に面白かった。</p>
-            <hr>
-          </div>
-          <div class="flex flex-col gap-y-2 pt-4">
-            <div class="flex gap-x-4">
-              <div class="text-yellow-500 not-italic">★★★★★</div>
-              <p class="text-sm text-gray-600 my-auto">higakijin</p>
-              <p class="text-sm text-xs text-gray-500 my-auto">3ヶ月前</p>
-            </div>
-            <p class="tracking-tight text-sm pb-2">悪くはない。坂本龍馬を暗殺した犯人を、幕末の社会情勢に照らし合わせて考えてみるというアプローチが非常に面白かった。</p>
-            <hr>
-          </div>
-          <div class="flex flex-col gap-y-2 pt-4">
-            <div class="flex gap-x-4">
-              <div class="text-yellow-500 not-italic">★★★★★</div>
-              <p class="text-sm text-gray-600 my-auto">higakijin</p>
-              <p class="text-sm text-xs text-gray-500 my-auto">3ヶ月前</p>
-            </div>
-            <p class="tracking-tight text-sm pb-2">悪くはない。坂本龍馬を暗殺した犯人を、幕末の社会情勢に照らし合わせて考えてみるというアプローチが非常に面白かった。</p>
-            <hr>
-          </div>
+          <%= turbo_frame_tag "reviews" do %>
+            <%= render @book.reviews.last(3).reverse %>
+            <% if @book.reviews.length >= 4 %>
+              <div class="w-full flex">
+                <%= link_to '▼ レビューを全て見る', book_reviews_path(@book), class: "mx-auto text-white bg-blue-800 rounded-lg px-4 py-2 m-4" %>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
