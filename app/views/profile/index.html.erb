@@ -1,0 +1,45 @@
+<%= render 'layouts/header' %>
+
+<section class="w-screen">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex gap-x-4 px-4 py-10">
+      <img src="https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg" class="h-32 w-32 rounded-full object-cover">
+      <div>
+        <p class="font-bold text-xl"><%= current_user.name %></p>
+        <p>Twitter url</p>
+      </div>
+      <div class="ml-auto">
+        <%= link_to "Edit profile", edit_user_registration_path, class: "shadow rounded-lg inline-block px-4 py-1 hover:bg-blue-50 border-2 text-sm" %>
+      </div>
+    </div>
+    <div>
+      <ul class="flex gap-x-10">
+        <%= link_to profile_index_path do %>
+          <li class="text-lg px-4 min-w-40 text-center pb-2 <%= 'font-medium border-b-4 border-black' if params[:page].nil? %>" >
+            Book<b class="text-md <%= params[:page].nil? ? 'font-medium' : 'font-normal' %>"> <%= current_user.books.published.length %></b>
+          </li>
+        <% end %>
+        <% %w(draft checking).each do |item| %>
+          <%= link_to profile_index_path(page: item) do %>
+            <li class="text-lg px-4 text-center pb-2 <%= 'font-medium border-b-4 border-black' if params[:page] == item %>" >
+              <%= item.capitalize %> <b class="text-md <%= params[:page] == item ? 'font-medium' : 'font-normal' %>"><%= current_user.books.public_send(item).length %></b>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="bg-blue-50 h-screen">
+    <div class="max-w-4xl mx-auto px-4 py-20 flex">
+      <% if @books.empty? %>
+        <p class="text-gray-400 text-xl font-bold mx-auto">No Books yet</p>
+      <% else %>
+        <div class="grid md:grid-cols-3 gap-4">
+          <%= render @books %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render 'layouts/footer' %>

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     resources :chapters, except: :index
     resources :reviews, only: %i[ index create destroy ]
   end
+  resources :profile, only: [:index]
 end

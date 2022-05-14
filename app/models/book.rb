@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   validates :introduction, presence: true, length: { in: 20..200 }
   validates :price, numericality: { in: 1000..5000 }
 
-  enum :status, %i[draft reservation published trashed]
+  enum :status, %i[draft checking published trashed]
 
   def review(score)
     (reviews.where(score: score).length.to_f * 100 / reviews.length.to_f).round
